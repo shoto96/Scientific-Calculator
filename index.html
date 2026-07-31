@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Científica Pro</title>
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+</head>
+<body>
+
+  <div class="container-fluid min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+    
+    <!-- Header -->
+    <div class="calc-header mb-3 d-flex align-items-center gap-3">
+      <div class="logo-icon">
+        <i class="fa-solid fa-calculator"></i>
+      </div>
+      <div>
+        <h1 class="m-0 fw-bold">Calc<span class="text-primary">Pro</span></h1>
+        <small class="text-secondary">Calculadora Científica Avançada</small>
+      </div>
+      <button id="themeToggle" class="btn btn-outline-secondary btn-sm ms-auto rounded-circle" title="Alternar tema">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+
+    <!-- Calculator Card -->
+    <div class="calculator-card">
+      <!-- Display -->
+      <div class="calc-display">
+        <div class="calc-history" id="historyText"></div>
+        <input type="text" id="input" class="calc-input" placeholder="0" readonly />
+        <div class="calc-angle-mode">
+          <span class="badge bg-primary" id="angleMode">RAD</span>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <ul class="nav nav-pills nav-fill calc-tabs mb-2" id="calcTabs">
+        <li class="nav-item">
+          <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-basic">Básico</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-scientific">Científico</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-algorithms">Algoritmos</button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Básico -->
+        <div class="tab-pane fade show active" id="tab-basic">
+          <div class="buttons-grid">
+            <button class="btn-calc btn-function" data-action="clear"><i class="fa-solid fa-trash-can"></i></button>
+            <button class="btn-calc btn-function" data-action="erase"><i class="fa-solid fa-delete-left"></i></button>
+            <button class="btn-calc btn-function" data-action="percent">%</button>
+            <button class="btn-calc btn-operator" data-value="/">÷</button>
+
+            <button class="btn-calc btn-number" data-value="7">7</button>
+            <button class="btn-calc btn-number" data-value="8">8</button>
+            <button class="btn-calc btn-number" data-value="9">9</button>
+            <button class="btn-calc btn-operator" data-value="*">×</button>
+
+            <button class="btn-calc btn-number" data-value="4">4</button>
+            <button class="btn-calc btn-number" data-value="5">5</button>
+            <button class="btn-calc btn-number" data-value="6">6</button>
+            <button class="btn-calc btn-operator" data-value="-">−</button>
+
+            <button class="btn-calc btn-number" data-value="1">1</button>
+            <button class="btn-calc btn-number" data-value="2">2</button>
+            <button class="btn-calc btn-number" data-value="3">3</button>
+            <button class="btn-calc btn-operator" data-value="+">+</button>
+
+            <button class="btn-calc btn-number" data-value="0">0</button>
+            <button class="btn-calc btn-number" data-value=".">.</button>
+            <button class="btn-calc btn-function" data-action="negate">+/-</button>
+            <button class="btn-calc btn-equals" data-action="equal"><i class="fa-solid fa-equals"></i></button>
+          </div>
+        </div>
+
+        <!-- Científico -->
+        <div class="tab-pane fade" id="tab-scientific">
+          <div class="buttons-grid sci-grid">
+            <button class="btn-calc btn-sci" data-action="sin">sin</button>
+            <button class="btn-calc btn-sci" data-action="cos">cos</button>
+            <button class="btn-calc btn-sci" data-action="tan">tan</button>
+            <button class="btn-calc btn-sci" data-action="toggleAngle" id="btnToggleAngle">DEG</button>
+
+            <button class="btn-calc btn-sci" data-action="asin">asin</button>
+            <button class="btn-calc btn-sci" data-action="acos">acos</button>
+            <button class="btn-calc btn-sci" data-action="atan">atan</button>
+            <button class="btn-calc btn-sci" data-action="pi">π</button>
+
+            <button class="btn-calc btn-sci" data-action="sqrt">√</button>
+            <button class="btn-calc btn-sci" data-action="pow">xʸ</button>
+            <button class="btn-calc btn-sci" data-action="square">x²</button>
+            <button class="btn-calc btn-sci" data-action="e">e</button>
+
+            <button class="btn-calc btn-sci" data-action="log">log</button>
+            <button class="btn-calc btn-sci" data-action="ln">ln</button>
+            <button class="btn-calc btn-sci" data-action="log2">log₂</button>
+            <button class="btn-calc btn-sci" data-action="exp">eˣ</button>
+
+            <button class="btn-calc btn-sci" data-action="fact">n!</button>
+            <button class="btn-calc btn-sci" data-action="abs">|x|</button>
+            <button class="btn-calc btn-sci" data-action="inv">1/x</button>
+            <button class="btn-calc btn-sci" data-action="cbrt">∛</button>
+
+            <button class="btn-calc btn-sci" data-value="(">(</button>
+            <button class="btn-calc btn-sci" data-value=")">)</button>
+            <button class="btn-calc btn-sci" data-action="memStore">MS</button>
+            <button class="btn-calc btn-sci" data-action="memRecall">MR</button>
+          </div>
+        </div>
+
+        <!-- Algoritmos -->
+        <div class="tab-pane fade" id="tab-algorithms">
+          <div class="algo-panel">
+            <div class="algo-select-wrapper mb-3">
+              <label class="form-label small text-secondary mb-1">Selecione o algoritmo</label>
+              <select id="algoSelect" class="form-select form-select-sm">
+                <option value="">-- Escolha --</option>
+                <option value="shunting">Avaliar Expressão (Shunting Yard)</option>
+                <option value="fibonacci">Sequência de Fibonacci</option>
+                <option value="factorial">Fatorial Completo</option>
+                <option value="baseconv">Conversão de Bases</option>
+                <option value="quadratic">Equação do 2º Grau</option>
+                <option value="prime">Teste de Primalidade</option>
+                <option value="gcd">MDC & MMC</option>
+              </select>
+            </div>
+
+            <!-- Shunting Yard -->
+            <div class="algo-section d-none" data-algo="shunting">
+              <div class="alert alert-info small py-2">
+                <i class="fa-solid fa-circle-info me-1"></i> Algoritmo de Dijkstra para avaliar expressões matemáticas com segurança.
+              </div>
+              <button class="btn btn-primary w-100 btn-sm" data-action="runShunting">Avaliar Expressão Atual</button>
+            </div>
+
+            <!-- Fibonacci -->
+            <div class="algo-section d-none" data-algo="fibonacci">
+              <div class="input-group input-group-sm mb-2">
+                <span class="input-group-text">n</span>
+                <input type="number" id="fibInput" class="form-control" placeholder="Ex: 10" min="0" max="100" />
+                <button class="btn btn-primary" data-action="runFibonacci">Calcular</button>
+              </div>
+              <div class="algo-result" id="fibResult"></div>
+            </div>
+
+            <!-- Factorial -->
+            <div class="algo-section d-none" data-algo="factorial">
+              <div class="input-group input-group-sm mb-2">
+                <span class="input-group-text">n</span>
+                <input type="number" id="factInput" class="form-control" placeholder="Ex: 5" min="0" max="170" />
+                <button class="btn btn-primary" data-action="runFactorial">Calcular</button>
+              </div>
+              <div class="algo-result" id="factResult"></div>
+            </div>
+
+            <!-- Base Conversion -->
+            <div class="algo-section d-none" data-algo="baseconv">
+              <div class="input-group input-group-sm mb-2">
+                <input type="text" id="baseInput" class="form-control" placeholder="Valor" />
+                <select id="baseFrom" class="form-select" style="max-width:80px">
+                  <option value="10">10</option>
+                  <option value="2">2</option>
+                  <option value="8">8</option>
+                  <option value="16">16</option>
+                </select>
+                <span class="input-group-text">→</span>
+                <select id="baseTo" class="form-select" style="max-width:80px">
+                  <option value="2">2</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="16">16</option>
+                </select>
+                <button class="btn btn-primary" data-action="runBaseConv">Converter</button>
+              </div>
+              <div class="algo-result" id="baseResult"></div>
+            </div>
+
+            <!-- Quadratic -->
+            <div class="algo-section d-none" data-algo="quadratic">
+              <div class="row g-2 mb-2">
+                <div class="col-4"><input type="number" id="quadA" class="form-control form-control-sm" placeholder="a" /></div>
+                <div class="col-4"><input type="number" id="quadB" class="form-control form-control-sm" placeholder="b" /></div>
+                <div class="col-4"><input type="number" id="quadC" class="form-control form-control-sm" placeholder="c" /></div>
+              </div>
+              <button class="btn btn-primary w-100 btn-sm" data-action="runQuadratic">Resolver ax² + bx + c = 0</button>
+              <div class="algo-result mt-2" id="quadResult"></div>
+            </div>
+
+            <!-- Prime -->
+            <div class="algo-section d-none" data-algo="prime">
+              <div class="input-group input-group-sm mb-2">
+                <input type="number" id="primeInput" class="form-control" placeholder="Número inteiro" min="1" />
+                <button class="btn btn-primary" data-action="runPrime">Testar</button>
+              </div>
+              <div class="algo-result" id="primeResult"></div>
+            </div>
+
+            <!-- GCD / LCM -->
+            <div class="algo-section d-none" data-algo="gcd">
+              <div class="row g-2 mb-2">
+                <div class="col-6"><input type="number" id="gcdA" class="form-control form-control-sm" placeholder="Número 1" /></div>
+                <div class="col-6"><input type="number" id="gcdB" class="form-control form-control-sm" placeholder="Número 2" /></div>
+              </div>
+              <button class="btn btn-primary w-100 btn-sm" data-action="runGcd">Calcular MDC & MMC</button>
+              <div class="algo-result mt-2" id="gcdResult"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Panel -->
+    <div class="history-card mt-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="fw-semibold small"><i class="fa-solid fa-clock-rotate-left me-1"></i> Histórico</span>
+        <button class="btn btn-link btn-sm text-danger p-0" data-action="clearHistory">Limpar</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="text-muted small text-center py-3">Nenhum cálculo ainda</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-secondary small mt-3 text-center">
+      <span>CalcPro v2.0 — Algoritmo Shunting Yard integrado</span>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/algorithm.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
